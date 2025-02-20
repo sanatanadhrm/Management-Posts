@@ -138,8 +138,5 @@ curl -X POST "http://localhost:3000/post/add" \
 
 ---
 
-## 📜 Lisensi
-Proyek ini menggunakan lisensi **MIT**.
 
-🚀 **Happy Coding!** 🎯
 
