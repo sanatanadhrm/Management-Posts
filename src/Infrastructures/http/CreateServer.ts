@@ -7,6 +7,7 @@ import status from '../../Interfaces/http/api/status'
 import post from '../../Interfaces/http/api/post'
 import DomainErrorTranslator from '../../Commons/exceptions/DomaintTranslatorError';
 import ClientError from '../../Commons/exceptions/ClientError';
+import Swagger from '../../config/Swagger';
 
 const createServer = async () => {
     const app = express();
@@ -15,6 +16,7 @@ const createServer = async () => {
     app.use(json());
     app.use(cors());
     app.use(urlencoded({ extended: true }));
+    Swagger(app);
     const errorHandler: ErrorRequestHandler = (err, req, res, next): any => {
       // Menggunakan DomainErrorTranslator untuk mengubah error
       if (res.headersSent) {
@@ -26,6 +28,7 @@ const createServer = async () => {
     
       if (translatedError instanceof ClientError) {
         return res.status(400).json({
+          status: "fail",
           message: translatedError.message,
         });
       }

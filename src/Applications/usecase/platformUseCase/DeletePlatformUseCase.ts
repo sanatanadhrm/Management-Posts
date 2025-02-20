@@ -1,3 +1,4 @@
+import DeletePlatform, { IDeletePlatform } from "../../../Domains/platform/entities/DeletePlatform";
 import { IPlatformRepository } from "../../../Domains/platform/entities/PlatformRepository";
 
 class DeletePlatformUseCase {
@@ -6,10 +7,10 @@ class DeletePlatformUseCase {
         this.platformRepository = platformRepository;
     }
     
-    async execute(useCasePayload : { id: number }) {
-        const { id } = useCasePayload;
-        await this.platformRepository.verifyIsPlatformExist(id);
-        return this.platformRepository.deletePlatformById(id);
+    async execute(useCasePayload : IDeletePlatform) {
+        const payload = new DeletePlatform(useCasePayload);
+        await this.platformRepository.verifyIsPlatformExist(payload.id);
+        return this.platformRepository.deletePlatformById(payload.id);
     }
 }
 export default DeletePlatformUseCase;

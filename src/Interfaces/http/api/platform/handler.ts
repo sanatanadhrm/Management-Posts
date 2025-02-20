@@ -71,10 +71,9 @@ class PlatformHandler {
             const deletePlatformUseCase = new DeletePlatformUseCase({
                 platformRepository
             });
-            const delPlatform = await deletePlatformUseCase.execute(req.body);
+            await deletePlatformUseCase.execute(req.body);
             res.status(200).json({
                 status: 'success',
-                data: delPlatform,
                 message: 'Platform deleted successfully',
               });
         } catch (error) {
